@@ -115,11 +115,11 @@ struct monome {
 	/* handle for the loaded protocol module */
 	void *dl_handle;
 
-	const char *serial;
-	const char *device;
+	const char *serial;         /**< Device's serial number string */
+	const char *device;         /**< Device's model name */
 	int rows, cols;
 
-	int fd;
+	int fd;                     /**< Device's file descriptor */
 
 	monome_callback_t handlers[MONOME_EVENT_MAX];
 	monome_rotate_t rotation;
