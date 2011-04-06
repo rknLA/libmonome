@@ -86,6 +86,10 @@ struct monome_led_functions {
 	int (*col)(monome_t *monome, uint_t x, uint_t y_off,
 	           size_t count, const uint8_t *data);
 	int (*intensity)(monome_t *monome, uint_t brightness);
+	
+	/* soundcyst 4+2 */
+	int (*color)(monome_t *monome, uint_t x, uint_t y,
+			     uint_t r, uint_t g, uint_t b);
 };
 
 struct monome_led_level_functions {

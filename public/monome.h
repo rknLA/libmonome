@@ -32,9 +32,12 @@ typedef enum {
 	MONOME_ENCODER_DELTA    = 0x02,
 	MONOME_ENCODER_KEY_UP   = 0x03,
 	MONOME_ENCODER_KEY_DOWN = 0x04,
+	
+	/* update for soundcyst 4+2 */
+	MONOME_ADC_CHANGE		= 0x05,
 
 	/* update this if you add event types */
-	MONOME_EVENT_MAX        = 0x05
+	MONOME_EVENT_MAX        = 0x06
 } monome_event_type_t;
 
 /* modes (argument to monome_mode) */
@@ -75,6 +78,11 @@ struct monome_event {
 			unsigned int number;
 			int delta;
 		} encoder;
+
+		struct {
+			unsigned int number;
+			int value;
+		} adc;
 	};
 };
 
@@ -125,6 +133,10 @@ int monome_led_level_row(monome_t *monome, unsigned int x_off,
                          unsigned int y, size_t count, const uint8_t *data);
 int monome_led_level_col(monome_t *monome, unsigned int x, unsigned int y_off,
                          size_t count, const uint8_t *data);
+
+/* added by soundcyst for rgb 4+2 */
+int monome_led_color(monome_t *monome, unsigned int x, unsigned int y,
+					 unsigned int red, unsigned int green, unsigned int blue);
 
 /* led ring commands */
 

@@ -37,4 +37,7 @@ struct monome_osc {
 	char *col_str;
 	char *row_str;
 	char *intensity_str;
+	
+	/* soundcyst 4+2 */
+	char *color_str;
 };

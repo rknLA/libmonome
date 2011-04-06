@@ -53,6 +53,9 @@ static monome_devmap_t mapping[] = {
 	/* determine device dimensions in initialization */
 	{"m%d",     "mext",   {0, 0},   "monome i2c", NO_QUIRKS},
 
+	/* soundcyst 4+2 */
+	{"sc42-%d",	"cyst",	  {4, 1},   "soundcyst 4+2", NO_QUIRKS},
+
 	{NULL}
 };
 
@@ -292,6 +295,18 @@ int monome_led_level_col(monome_t *monome, uint_t x, uint_t y_off,
 	if( monome->led_level.col )
 		return monome->led_level.col(monome, x, y_off, count, data);
 	return -1;
+}
+
+
+int monome_led_color(monome_t *monome, unsigned int x, unsigned int y,
+					 unsigned int red, unsigned int green, unsigned int blue)
+{
+	if ( monome->led.color )
+	{
+		return monome->led.color(monome, x, y, red, green, blue);
+	} else {
+		return -1;
+	}
 }
 
 int monome_led_ring_set(monome_t *monome, uint_t ring, uint_t led,

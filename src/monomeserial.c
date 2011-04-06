@@ -159,6 +159,11 @@ static void register_osc_methods(char *prefix, monome_t *monome) {
 	lo_server_add_method(srv, cmd_buf, "", osc_intensity_handler, monome);
 	lo_server_add_method(srv, cmd_buf, "i", osc_intensity_handler, monome);
 	m_free(cmd_buf);
+
+	/* soundcyst addition for 4+2 */
+	asprintf(&cmd_buf, "/%s/color", prefix);
+	lo_server_add_method(srv, cmd_buf, "iiiii", osc_led_color_handler, monome);
+	m_free(cmd_buf);
 }
 
 static void unregister_osc_methods(char *prefix) {
@@ -192,6 +197,12 @@ static void unregister_osc_methods(char *prefix) {
 	asprintf(&cmd_buf, "/%s/frame", prefix);
 	lo_server_del_method(srv, cmd_buf, "iiiiiiii");
 	lo_server_del_method(srv, cmd_buf, "iiiiiiiiii");
+	m_free(cmd_buf);
+
+
+	/* soundcyst addition for 4+2 */
+	asprintf(&cmd_buf, "/%s/color", prefix);
+	lo_server_del_method(srv, cmd_buf, "iiiii");
 	m_free(cmd_buf);
 }
 

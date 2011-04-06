@@ -97,6 +97,15 @@ static int proto_osc_led_col(monome_t *monome, uint_t x, uint_t y_off,
 	return LO_SEND_MSG(col, "iiii", x, y_off, data[0], data[1]);
 }
 
+static int proto_osc_led_color(monome_t *monome, uint_t x, uint_t y,
+							   uint_t red, uint_t green, uint_t blue)
+{
+	SELF_FROM(monome);
+
+	return LO_SEND_MSG(color, "iiiii", x, y, red, green, blue);
+
+}
+
 static int proto_osc_led_map(monome_t *monome, uint_t x_off, uint_t y_off,
                              const uint8_t *f) {
 	SELF_FROM(monome);
@@ -152,6 +161,9 @@ static int proto_osc_open(monome_t *monome, const char *dev,
 	cache_osc_path(col, "grid/led/col");
 	cache_osc_path(row, "grid/led/row");
 	cache_osc_path(intensity, "grid/led/intensity");
+
+	/* soundcyst 4+2 */
+	cache_osc_path(color, "grid/led/color");
 #undef cache_osc_path
 
 	return 0;
@@ -171,6 +183,9 @@ static void proto_osc_free(monome_t *monome) {
 	clear_osc_path(col);
 	clear_osc_path(row);
 	clear_osc_path(intensity);
+
+	/* soundcyst 4+2 */
+	clear_osc_path(color);
 #undef clear_osc_path
 
 	m_free(self->prefix);
@@ -205,6 +220,9 @@ monome_t *monome_protocol_new() {
 	monome->led.row    = proto_osc_led_row;
 	monome->led.col    = proto_osc_led_col;
 	monome->led.intensity = proto_osc_led_intensity;
+
+	/* soundcyst 4+2 */
+	monome->led.color  = proto_osc_led_color;
 
 	monome->led_ring = NULL;
 
