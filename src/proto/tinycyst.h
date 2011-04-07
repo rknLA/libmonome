@@ -34,7 +34,7 @@ typedef enum {
 	PROTO_TINYCYST_CLEAR               = 0x90,
 	PROTO_TINYCYST_MODE                = 0xB0,
 	
-	PROTO_TINYCYST_COLOR               = 0xF0,
+	PROTO_TINYCYST_LED_COLOR           = 0xF0,
 } proto_tinycyst_message_t;
 
 /* modes (argument to the PROTO_TINYCYST_MODE output command) */

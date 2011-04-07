@@ -18,6 +18,7 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdio.h>
 
 #include <monome.h>
 #include "internal.h"
@@ -30,12 +31,29 @@
  * private
  */
 
+void outputHex(const uint8_t *buf, ssize_t bufsize)
+{
+	int i;
+	for (i = 0; i < bufsize; ++i)
+	{
+		printf("%X ", buf[i]);
+	}
+
+	printf("\n");
+}
+
+
 static int monome_write(monome_t *monome, const uint8_t *buf,
 						ssize_t bufsize) {
-    if( monome_platform_write(monome, buf, bufsize) == bufsize )
-		return 0;
+	
+	outputHex(buf, bufsize);
 
-	return -1;
+    if( monome_platform_write(monome, buf, bufsize) == bufsize )
+	{
+		return 0;
+	} else {
+		return -1;
+	}
 }
 
 
@@ -84,7 +102,7 @@ static int proto_tinycyst_led_row(monome_t *monome, uint_t x_off, uint_t y,
 
 	buf[0] = PROTO_TINYCYST_LED_ROW;
 
-	buf[1] = &data & 0x0F;
+	buf[1] = (*data) & 0x0F;
 
 	return monome_write(monome, buf, sizeof(buf));
 

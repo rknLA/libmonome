@@ -26,6 +26,8 @@ osc: protocol_osc.$(LIBSUFFIX)
 	true
 mext: protocol_mext.$(LIBSUFFIX)
 	true
+tinycyst: protocol_tinycyst.$(LIBSUFFIX)
+	true
 
 protocol_mext.so: mext.o
 	echo "  LD      src/proto/$@"
@@ -36,6 +38,18 @@ protocol_mext.dylib: mext.o
 	$(LD) -dynamiclib -Wl,-install_name,$@ $(LDFLAGS) $(SO_LDFLAGS) -o $@ $<
 
 protocol_mext.dll: mext.o
+	echo "  LD      src/proto/$@"
+	$(LD) $(LDFLAGS) $(SO_LDFLAGS) -shared -o $@ $<
+
+protocol_tinycyst.so: tinycyst.o
+	echo "  LD      src/proto/$@"
+	$(LD) -shared -Wl,-soname,$@ $(LDFLAGS) $(SO_LDFLAGS) -o $@ $<
+
+protocol_tinycyst.dylib: tinycyst.o
+	echo "  LD      src/proto/$@"
+	$(LD) -dynamiclib -Wl,-install_name,$@ $(LDFLAGS) $(SO_LDFLAGS) -o $@ $<
+
+protocol_tinycyst.dll: tinycyst.o
 	echo "  LD      src/proto/$@"
 	$(LD) $(LDFLAGS) $(SO_LDFLAGS) -shared -o $@ $<
 

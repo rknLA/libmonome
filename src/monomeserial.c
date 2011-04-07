@@ -126,6 +126,13 @@ static int osc_intensity_handler(const char *path, const char *types,
 	return monome_led_intensity(monome, intensity);
 }
 
+static int osc_led_color_handler(const char *path, const char *types,
+                                 lo_arg **argv, int argc,
+                                 lo_message data, void *user_data) {
+
+    return 0;
+}
+
 static void register_osc_methods(char *prefix, monome_t *monome) {
 	lo_server_thread srv = state.server;
 	char *cmd_buf;
