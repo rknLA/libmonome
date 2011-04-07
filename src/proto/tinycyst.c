@@ -46,7 +46,7 @@ void outputHex(const uint8_t *buf, ssize_t bufsize)
 static int monome_write(monome_t *monome, const uint8_t *buf,
 						ssize_t bufsize) {
 	
-	outputHex(buf, bufsize);
+//	outputHex(buf, bufsize);
 
     if( monome_platform_write(monome, buf, bufsize) == bufsize )
 	{
@@ -131,6 +131,8 @@ static int proto_tinycyst_next_event(monome_t *monome, monome_event_t *e) {
 
 	if( monome_platform_read(monome, buf, sizeof(buf)) < sizeof(buf) )
 		return 0;
+
+	//outputHex((const uint8_t*) &buf, (ssize_t) 2);
 
 	switch( buf[0] ) {
 	case PROTO_TINYCYST_BUTTON_DOWN:

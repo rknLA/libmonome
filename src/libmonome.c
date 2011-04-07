@@ -54,7 +54,7 @@ static monome_devmap_t mapping[] = {
 	{"m%d",     "mext",   {0, 0},   "monome i2c", NO_QUIRKS},
 
 	/* soundcyst 4+2 */
-	{"sc42-%d",	"cyst",	  {4, 1},   "soundcyst 4+2", NO_QUIRKS},
+	{"sc42%d",	"tinycyst", {4, 1},   "soundcyst 4+2", NO_QUIRKS},
 
 	{NULL}
 };
